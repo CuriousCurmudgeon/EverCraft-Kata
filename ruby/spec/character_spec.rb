@@ -53,4 +53,25 @@ describe Character do
     end
   end
 
+  describe 'attack' do
+    let(:armor_class) { 5 }
+    let(:opponent) {
+      c = Character.new
+      c.armor_class = armor_class
+      c
+    }
+
+    it "hits if the die roll is larger than the opponent's armor class" do
+      subject.attack(opponent, armor_class + 1).should be true
+    end
+
+    it "hits if the die roll equals the opponent's armor class" do
+      subject.attack(opponent, armor_class).should be true
+    end
+
+    it "misses if the die roll is less than the opponent's armor class" do
+      subject.attack(opponent, armor_class - 1).should be false
+    end
+  end
+
 end
