@@ -31,4 +31,26 @@ describe Character do
 
   end
 
+  describe "armor_class" do
+    it "defaults to 10" do
+      subject.armor_class.should == 10
+    end
+
+    it "can be changed" do
+      subject.armor_class = 5
+      subject.armor_class.should == 5
+    end
+  end
+
+  describe "hit_points" do
+    it "defaults to 5" do
+      subject.hit_points.should == 5
+    end
+
+    it "can be changed" do
+      subject.hit_points = 10
+      subject.hit_points.should == 10
+    end
+  end
+
 end
