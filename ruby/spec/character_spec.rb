@@ -62,15 +62,15 @@ describe Character do
     }
 
     it "hits if the die roll is larger than the opponent's armor class" do
-      subject.attack(opponent, armor_class + 1).should be true
+      subject.attack(opponent, armor_class + 1).should == :hit
     end
 
     it "hits if the die roll equals the opponent's armor class" do
-      subject.attack(opponent, armor_class).should be true
+      subject.attack(opponent, armor_class).should be :hit
     end
 
     it "misses if the die roll is less than the opponent's armor class" do
-      subject.attack(opponent, armor_class - 1).should be false
+      subject.attack(opponent, armor_class - 1).should be :miss
     end
   end
 
