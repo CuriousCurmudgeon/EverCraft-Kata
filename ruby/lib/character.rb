@@ -16,4 +16,11 @@ class Character
     @alignment = value
   end
 
+  # Attack an opponent.
+  # @param opponent Who is being attacked.
+  # @param die_roll Value from the roll of a d20.
+  def attack opponent, die_roll
+    die_roll >= opponent.armor_class
+  end
+
 end
