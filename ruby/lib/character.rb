@@ -1,13 +1,24 @@
 class Character
 
   ALIGNMENTS = [:good, :evil, :neutral]
+  ABILITY_MODIFIERS = [-5, -4, -4, -3, -3,
+                       -2, -2, -1, -1,  0,
+                        0, +1, +1, +2, +2,
+                       +3, +3, +4, +4, +5]
 
   attr_accessor :name, :armor_class, :hit_points
-  attr_reader :alignment
+  attr_reader :alignment, :strength, :dexterity, :constitution,
+              :wisdom, :intelligence, :charisma
 
-  def initialize
-    @armor_class = 10
-    @hit_points = 5
+  def initialize params = {}
+    @armor_class = params[:armor_class] || 10
+    @hit_points = params[:hit_points] || 5
+
+    [:strength, :dexterity, :constitution, :wisdom, :intelligence, :charisma].each do |attribute|
+      value = params[attribute] || 10
+      raise if value < 1 || value > 20
+      instance_variable_set("@#{attribute}", value)
+    end
   end
 
   # Only values in ALIGNMENT are valid

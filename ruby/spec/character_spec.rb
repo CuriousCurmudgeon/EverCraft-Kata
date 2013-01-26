@@ -1,6 +1,32 @@
 require 'character'
 
+shared_examples "an ability score" do
+  it "defaults to 10" do
+    subject.send(ability).should == 10
+  end
+
+  it "can be initialized to a value from 1-20" do
+    c = Character.new(ability => 1)
+    c.send(ability).should == 1
+  end
+
+  it "cannot be initialized to a value < 1" do
+    lambda { Character.new(ability => 0) }.should raise_error
+  end
+
+  it "cannot be initialized to a value > 20" do
+    lambda { Character.new(ability => 21) }.should raise_error
+  end
+end
+
 describe Character do
+
+  describe "initialize" do
+    it "can take a hash" do
+      c = Character.new(:armor_class => 8)
+      c.armor_class.should == 8
+    end
+  end
 
   describe "name" do
     it "can be set" do
@@ -29,6 +55,42 @@ describe Character do
       lambda { subject.alignment = :invalid }.should raise_error
     end
 
+  end
+
+  describe "ABILITY_MODIFIERS" do
+    it "can be read" do
+      Character::ABILITY_MODIFIERS.size.should == 20
+    end
+  end
+
+  describe "strength" do
+    let(:ability) { :strength }
+    it_behaves_like "an ability score"
+  end
+
+  describe "dexterity" do
+    let(:ability) { :dexterity }
+    it_behaves_like "an ability score"
+  end
+
+  describe "constitution" do
+    let(:ability) { :constitution }
+    it_behaves_like "an ability score"
+  end
+
+  describe "wisdom" do
+    let(:ability) { :wisdom }
+    it_behaves_like "an ability score"
+  end
+
+  describe "intelligence" do
+    let(:ability) { :intelligence }
+    it_behaves_like "an ability score"
+  end
+
+  describe "charisma" do
+    let(:ability) { :charisma }
+    it_behaves_like "an ability score"
   end
 
   describe "armor_class" do
