@@ -10,7 +10,8 @@ namespace EverCraft {
 
 	public enum AttackResult {
 		Miss,
-		Hit
+		Hit,
+		CriticalHit
 	}
 
 	public class Character {
@@ -20,8 +21,7 @@ namespace EverCraft {
 			this.HitPoints = hitPoints;
 		}
 
-		#region Properties
-
+		#region Properties 
 		public string Name { get; set; }
 
 		/// <summary>
@@ -59,15 +59,26 @@ namespace EverCraft {
 			if(opponent == null) {
 				throw new ArgumentException("opponent cannot be null");
 			}
+
 			if(roll < 1 || roll > 20) {
 				throw new ArgumentException("roll must be from 1-20");
 			}
 
 			var result = AttackResult.Miss;
-			if(roll >= opponent.ArmorClass) {
+
+			if(roll == 20) {
+				result = AttackResult.CriticalHit;
+				opponent.HitPoints -= 2;
+			}
+			else if(roll >= opponent.ArmorClass) {
 				result = AttackResult.Hit;
+				opponent.HitPoints -= 1;
 			}
 			return result;
+		}
+
+		public bool IsDead() {
+			return this.HitPoints < 1;
 		}
 
 		#endregion

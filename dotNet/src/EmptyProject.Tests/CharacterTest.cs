@@ -62,22 +62,29 @@ namespace EverCraft.Tests {
 		#region Attack
 
 		[Test]
-		public void Attack_hits_if_base_attack_equals_armor_class() {
+		public void Attack_hits_if_roll_equals_opponent_armor_class() {
 			var opponent = new Character(armorClass: 5);
 			character.Attack(opponent, 5).ShouldEqual(AttackResult.Hit);
 		}
 
 		[Test]
-		public void Attack_misses_if_base_attack_is_less_than_armor_class() {
+		public void Attack_misses_if_roll_is_less_than_opponent_armor_class() {
 			var opponent = new Character(armorClass: 5);
 			character.Attack(opponent, 4).ShouldEqual(AttackResult.Miss);
 		}
 
 		[Test]
-		public void Attack_hits_if_base_attack_is_greater_than_armor_class() {
+		public void Attack_hits_if_role_is_greater_than_opponent_armor_class() {
 			var opponent = new Character(armorClass: 5);
 			character.Attack(opponent, 6).ShouldEqual(AttackResult.Hit);
 		}
+
+		[Test]
+		public void Attack_returns_critical_hit_if_roll_is_20() {
+			var opponent = new Character();
+			character.Attack(opponent, 20).ShouldEqual(AttackResult.CriticalHit);
+		}
+
 
 		[Test]
 		[ExpectedException(typeof(ArgumentException))]
@@ -99,7 +106,33 @@ namespace EverCraft.Tests {
 			character.Attack(opponent, 21);
 		}
 
+		[Test]
+		public void Attacks_deals_one_damage_to_opponent_on_hit() {
+			var opponent = new Character(armorClass: 5, hitPoints: 5);
+			character.Attack(opponent, 6);
+			opponent.HitPoints.ShouldEqual(4);
+		}
+
+		[Test]
+		public void Attacks_deals_one_damage_to_opponent_on_critical_hit() {
+			var opponent = new Character(armorClass: 5, hitPoints: 5);
+			character.Attack(opponent, 20);
+			opponent.HitPoints.ShouldEqual(3);
+		}
+
 		#endregion
+
+		[Test]
+		public void IsDead_returns_false_if_hit_points_greater_than_0() {
+			var character = new Character(hitPoints: 5);
+			character.IsDead().ShouldEqual(false);
+		}
+
+		[Test]
+		public void IsDead_returns_true_if_hit_points_equals_0() {
+			var character = new Character(hitPoints: 0);
+			character.IsDead().ShouldEqual(true);
+		}
 	}
 }
 
