@@ -8,12 +8,19 @@ namespace EverCraft {
 		Neutral
 	}
 
+	public enum AttackResult {
+		Miss,
+		Hit
+	}
+
 	public class Character {
 
-		public Character (int armor_class = 10, int hit_points = 5) {
-			this.ArmorClass = armor_class;
-			this.HitPoints = hit_points;
+		public Character (int armorClass = 10, int hitPoints = 5) {
+			this.ArmorClass = armorClass;
+			this.HitPoints = hitPoints;
 		}
+
+		#region Properties
 
 		public string Name { get; set; }
 
@@ -37,6 +44,33 @@ namespace EverCraft {
 		/// 
 		/// </value>
 		public int HitPoints { get; private set; }
+
+		#endregion
+
+		#region Methods
+
+		/// <summary>
+		/// Attack another character. Hits if our role is greater than the
+		/// opponent's armor class.
+		/// </summary>
+		/// <param name='opponent'>Whom we are attacking.</param>
+		/// <param name='roll'>An int from 1-20.</param>
+		public AttackResult Attack(Character opponent, int roll) {
+			if(opponent == null) {
+				throw new ArgumentException("opponent cannot be null");
+			}
+			if(roll < 1 || roll > 20) {
+				throw new ArgumentException("roll must be from 1-20");
+			}
+
+			var result = AttackResult.Miss;
+			if(roll >= opponent.ArmorClass) {
+				result = AttackResult.Hit;
+			}
+			return result;
+		}
+
+		#endregion
 	}
 }
 
