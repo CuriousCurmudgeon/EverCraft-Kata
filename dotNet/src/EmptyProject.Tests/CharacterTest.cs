@@ -11,6 +11,12 @@ namespace EverCraft.Tests {
 			var character = new Character { Name = "Test" };
 			character.Name.ShouldEqual("Test");
 		}
+
+		[Test]
+		public void can_get_and_set_alignment() {
+			var character = new Character { Alignment = Alignment.Evil };
+			character.Alignment.ShouldEqual(Alignment.Evil);
+		}
 	}
 }
 
