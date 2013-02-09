@@ -72,6 +72,18 @@ namespace EverCraft.Tests {
 			character.Strength.ShouldEqual(5);
 		}
 
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Strength_cannot_be_less_than_1() {
+			new Character(strength: 0);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Strength_cannot_be_greater_than_20() {
+			new Character(strength: 21);
+		}
+
 		#endregion
 
 		#region Dexterity
@@ -85,6 +97,18 @@ namespace EverCraft.Tests {
 		public void Dexterity_can_be_initialized_to_a_different_value() {
 			character = new Character(dexterity: 5);
 			character.Dexterity.ShouldEqual(5);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Dexterity_cannot_be_less_than_1() {
+			new Character(dexterity: 0);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Dexterity_cannot_be_greater_than_20() {
+			new Character(dexterity: 21);
 		}
 
 		#endregion
@@ -102,6 +126,18 @@ namespace EverCraft.Tests {
 			character.Constitution.ShouldEqual(5);
 		}
 
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Constitution_cannot_be_less_than_1() {
+			new Character(constitution: 0);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Constitution_cannot_be_greater_than_20() {
+			new Character(constitution: 21);
+		}
+
 		#endregion
 
 		#region Wisdom
@@ -115,6 +151,18 @@ namespace EverCraft.Tests {
 		public void Wisdom_can_be_initialized_to_a_different_value() {
 			character = new Character(wisdom: 5);
 			character.Wisdom.ShouldEqual(5);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Wisdom_cannot_be_less_than_1() {
+			new Character(wisdom: 0);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Wisdom_cannot_be_greater_than_20() {
+			new Character(wisdom: 21);
 		}
 
 		#endregion
@@ -132,6 +180,18 @@ namespace EverCraft.Tests {
 			character.Intelligence.ShouldEqual(5);
 		}
 
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Intelligence_cannot_be_less_than_1() {
+			new Character(intelligence: 0);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Intelligence_cannot_be_greater_than_20() {
+			new Character(intelligence: 21);
+		}
+
 		#endregion
 
 		#region Charisma
@@ -145,6 +205,18 @@ namespace EverCraft.Tests {
 		public void Charisma_can_be_initialized_to_a_different_value() {
 			character = new Character(charisma: 5);
 			character.Charisma.ShouldEqual(5);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Charisma_cannot_be_less_than_1() {
+			new Character(charisma: 0);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void Charisma_cannot_be_greater_than_20() {
+			new Character(charisma: 21);
 		}
 
 		#endregion
