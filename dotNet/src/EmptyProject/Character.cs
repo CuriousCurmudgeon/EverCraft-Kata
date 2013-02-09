@@ -16,12 +16,20 @@ namespace EverCraft {
 
 	public class Character {
 
-		public Character (int armorClass = 10, int hitPoints = 5) {
+		public Character (int armorClass = 10, int hitPoints = 5, int strength = 10, int dexterity = 10,
+		                  int constitution = 10, int wisdom = 10, int intelligence = 10, int charisma = 10) {
 			this.ArmorClass = armorClass;
 			this.HitPoints = hitPoints;
+			this.Strength = strength;
+			this.Dexterity = dexterity;
+			this.Constitution = constitution;
+			this.Wisdom = wisdom;
+			this.Intelligence = intelligence;
+			this.Charisma = charisma;
 		}
 
-		#region Properties 
+		#region Properties
+
 		public string Name { get; set; }
 
 		/// <summary>
@@ -37,13 +45,13 @@ namespace EverCraft {
 		/// </summary>
 		public int ArmorClass { get; private set; }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <value>
-		/// 
-		/// </value>
 		public int HitPoints { get; private set; }
+		public int Strength { get; private set; }
+		public int Dexterity { get; private set; }
+		public int Constitution { get; private set; }
+		public int Wisdom { get; private set; }
+		public int Intelligence { get; private set; }
+		public int Charisma { get; private set; }
 
 		#endregion
 

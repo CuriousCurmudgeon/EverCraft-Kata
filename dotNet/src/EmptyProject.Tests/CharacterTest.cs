@@ -59,6 +59,96 @@ namespace EverCraft.Tests {
 
 		#endregion
 
+		#region Strength
+
+		[Test]
+		public void Strength_defaults_to_10() {
+			character.Strength.ShouldEqual(10);
+		}
+
+		[Test]
+		public void Strength_can_be_initialized_to_a_different_value() {
+			character = new Character(strength: 5);
+			character.Strength.ShouldEqual(5);
+		}
+
+		#endregion
+
+		#region Dexterity
+
+		[Test]
+		public void Dexterity_defaults_to_10() {
+			character.Dexterity.ShouldEqual(10);
+		}
+
+		[Test]
+		public void Dexterity_can_be_initialized_to_a_different_value() {
+			character = new Character(dexterity: 5);
+			character.Dexterity.ShouldEqual(5);
+		}
+
+		#endregion
+
+		#region Constitution
+
+		[Test]
+		public void Constitution_defaults_to_10() {
+			character.Constitution.ShouldEqual(10);
+		}
+
+		[Test]
+		public void Constitution_can_be_initialized_to_a_different_value() {
+			character = new Character(constitution: 5);
+			character.Constitution.ShouldEqual(5);
+		}
+
+		#endregion
+
+		#region Wisdom
+
+		[Test]
+		public void Wisdom_defaults_to_10() {
+			character.Wisdom.ShouldEqual(10);
+		}
+
+		[Test]
+		public void Wisdom_can_be_initialized_to_a_different_value() {
+			character = new Character(wisdom: 5);
+			character.Wisdom.ShouldEqual(5);
+		}
+
+		#endregion
+
+		#region Intelligence
+
+		[Test]
+		public void Intelligence_defaults_to_10() {
+			character.Intelligence.ShouldEqual(10);
+		}
+
+		[Test]
+		public void Intelligence_can_be_initialized_to_a_different_value() {
+			character = new Character(intelligence: 5);
+			character.Intelligence.ShouldEqual(5);
+		}
+
+		#endregion
+
+		#region Charisma
+
+		[Test]
+		public void Charisma_defaults_to_10() {
+			character.Charisma.ShouldEqual(10);
+		}
+
+		[Test]
+		public void Charisma_can_be_initialized_to_a_different_value() {
+			character = new Character(charisma: 5);
+			character.Charisma.ShouldEqual(5);
+		}
+
+		#endregion
+
 		#region Attack
 
 		[Test]
@@ -74,7 +164,7 @@ namespace EverCraft.Tests {
 		}
 
 		[Test]
-		public void Attack_hits_if_role_is_greater_than_opponent_armor_class() {
+		public void Attack_hits_if_roll_is_greater_than_opponent_armor_class() {
 			var opponent = new Character(armorClass: 5);
 			character.Attack(opponent, 6).ShouldEqual(AttackResult.Hit);
 		}
@@ -84,7 +174,6 @@ namespace EverCraft.Tests {
 			var opponent = new Character();
 			character.Attack(opponent, 20).ShouldEqual(AttackResult.CriticalHit);
 		}
-
 
 		[Test]
 		[ExpectedException(typeof(ArgumentException))]
@@ -122,6 +211,8 @@ namespace EverCraft.Tests {
 
 		#endregion
 
+		#region IsDead
+
 		[Test]
 		public void IsDead_returns_false_if_hit_points_greater_than_0() {
 			var character = new Character(hitPoints: 5);
@@ -133,6 +224,8 @@ namespace EverCraft.Tests {
 			var character = new Character(hitPoints: 0);
 			character.IsDead().ShouldEqual(true);
 		}
+
+		#endregion
 	}
 }
 
