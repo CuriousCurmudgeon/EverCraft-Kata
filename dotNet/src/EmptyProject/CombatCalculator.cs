@@ -41,6 +41,8 @@ namespace EverCraft {
 
 		#endregion
 
+		#region Public Methods
+
 		/// <summary>
 		/// Attack another character. Hits if our role is greater than the
 		/// opponent's armor class.
@@ -53,18 +55,37 @@ namespace EverCraft {
 			}
 			Helpers.ValidateD20Value("roll", roll);
 
+			var attackerStrengthModifier = this.modifierTable[this.Attacker.Strength - 1];
+			var modifiedRoll = roll + attackerStrengthModifier;
+			var modifiedArmorClass = opponent.ArmorClass + this.modifierTable[opponent.Dexterity - 1];
+
 			var result = AttackResult.Miss;
+			var damage = 0;
 
 			if(roll == 20) {
 				result = AttackResult.CriticalHit;
-				opponent.HitPoints -= 2;
+				damage = 2 + (2 * attackerStrengthModifier);
 			}
-			else if(roll >= opponent.ArmorClass) {
+			else if(modifiedRoll >= modifiedArmorClass) {
 				result = AttackResult.Hit;
-				opponent.HitPoints -= 1;
+				damage = 1 + attackerStrengthModifier;
 			}
+
+			if((result == AttackResult.Hit || result == AttackResult.CriticalHit) && damage < 1) {
+				damage = 1;
+			}
+
+			opponent.HitPoints -= damage;
+
 			return result;
 		}
+
+		#endregion
+
+		#region Private Methods
+
+	
+		#endregion
 
 	}
 }
