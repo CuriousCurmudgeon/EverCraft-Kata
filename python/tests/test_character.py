@@ -63,5 +63,27 @@ class TestCharacter(unittest.TestCase):
         character = Character(hit_points=-1)
         self.assertTrue(character.is_dead)
 
+    def test_character_strength_defaults_to_ten(self):
+        self._test_default_ability_value(lambda c: c.strength, 10)
+
+    def test_character_dexterity_defaults_to_ten(self):
+        self._test_default_ability_value(lambda c: c.dexterity, 10)
+
+    def test_character_constitution_defaults_to_ten(self):
+        self._test_default_ability_value(lambda c: c.constitution, 10)
+
+    def test_character_wisdom_defaults_to_ten(self):
+        self._test_default_ability_value(lambda c: c.wisdom, 10)
+
+    def test_character_intelligence_defaults_to_ten(self):
+        self._test_default_ability_value(lambda c: c.intelligence, 10)
+
+    def test_character_charisma_defaults_to_ten(self):
+        self._test_default_ability_value(lambda c: c.charisma, 10)
+
+    def _test_default_ability_value(self, expression, expected_value):
+        character = Character()
+        self.assertEqual(expression(character), expected_value)
+
 if __name__ == '__main__':
     unittest.main()

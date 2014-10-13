@@ -5,9 +5,18 @@ Alignment = Enum("Alignment", "Good Neutral Evil")
 class Character:
     name = ""
     alignment = Alignment.Good
-    char_class = "Human"
     hit_points = 5
     armor_class = 10
+
+    strength = 10
+    dexterity = 10
+    constitution = 10
+    wisdom = 10
+    intelligence = 10
+    charisma = 10
+
+    _ability_modifiers = [-5, -4, -4, -3, -3, -2, -2, -1, -1, 0,\
+                           0, +1, +1, +2, +2, +3, +3, +4, +4, +5]
 
     def __init__(self, *args, **kwargs):
         for key in kwargs:
@@ -26,11 +35,6 @@ class Character:
 
     def is_dead(self):
         return hit_points <= 0
-
-# class Combat:
-#     attack
-
-#     def __init__(self, attacker, defender):
 
 if __name__ == "__main__":
     import doctest
